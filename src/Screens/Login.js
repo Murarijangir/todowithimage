@@ -45,7 +45,7 @@ const Login = ({ navigation }) => {
                 >Forgot Password</Text>
 
 
-                <Button btn_text={"Submit"} on_press={() => { navigation.navigate('Curd') }} />
+                <Button btn_text={"Submit"} on_press={() => { navigation.navigate('Home') }} />
 
 
                 <Text style={{ fontSize: 20, textAlign: 'center', marginTop: 10 }}>OR</Text>
