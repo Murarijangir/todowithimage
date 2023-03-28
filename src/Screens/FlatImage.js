@@ -26,6 +26,20 @@ const App = () => {
             }
             title={'Test Marker'}
             description={'This is a description of the marker'}
+
+          />
+           <Marker
+            draggable
+            coordinate={{
+              latitude: 26.861298503026376,
+              longitude: 75.7641702890396,
+            }}
+            onDragEnd={
+              (e) => alert(JSON.stringify(e.nativeEvent.coordinate))
+            }
+            title={'Test Marker'}
+            description={'This is a description of the marker'}
+            onPress={()=>alert('CityPark')}
           />
         </MapView>
       </View>

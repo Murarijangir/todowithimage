@@ -9,9 +9,9 @@ const SecondPage = ({ navigation, route }) => {
   console.log('======>', show1); console.log('======>', show2);
   return (
     <View style={{ flex: 1 }}>
-      <Text >text {show}</Text>
-      <Text >text {show1}</Text>
-      <Text >text {show2}</Text>
+      <Text >Email {show}</Text>
+      <Text >Password {show1}</Text>
+      <Text >Address {show2}</Text>
 
 
     

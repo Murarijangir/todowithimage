@@ -5,7 +5,7 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 
 const Home = ({navigation}) => {
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState("@gmail.com");
     const [password, setPassword] = useState();
     const [address, setAddress] = useState();
 
@@ -14,6 +14,17 @@ const Home = ({navigation}) => {
     const [data2, setData2] = useState(address);
 
     const handleSubmit = (item) => {
+        if (!email.trim()) {
+            alert('Enter verify Email');
+            return
+        }
+        else if (!password.trim()) {
+            alert('Enter strong Password');
+            return
+        }
+        else if (!address.trim()) {
+            alert('Enter address');
+        }
         navigation.navigate('SecondPage', {
             item: item,
             key: data,
@@ -26,12 +37,6 @@ const Home = ({navigation}) => {
         setPassword();
     };
 
-    // const handleSubmit1 = () => {
-    //     setAddress();
-    //     setEmail();
-    //     setPassword();
-    // }
-    console.log('ram', handleSubmit);
 
     return (
         <View>

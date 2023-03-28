@@ -41,12 +41,11 @@ const Login = ({ navigation }) => {
                     />
                 </View>
                 <Text style={{ marginTop: 15, marginStart: '65%', fontWeight: 'bold', fontSize: 15, color: '#1E88E5' }}
-                    onPress={() => { navigation.navigate('CalanderPicker') }}
+                    onPress={() => { navigation.navigate('ToolTip') }}
                 >Forgot Password</Text>
 
 
-                <Button btn_text={"Submit"} on_press={() => { navigation.navigate('Home') }} />
-
+                <Button btn_text={"Submit"} on_press={() => { navigation.navigate('Curd') }} />
 
                 <Text style={{ fontSize: 20, textAlign: 'center', marginTop: 10 }}>OR</Text>
                 <View style={{ flexDirection: 'row', alignContent: 'center', alignSelf: 'center', marginTop: 8 }}>
@@ -86,6 +85,10 @@ style={{backgroundColor:'#337CFF',paddingVertical:10,marginTop:10,alignItems:'ce
 <TouchableOpacity
 onPress={()=>{navigation.navigate('Calculator')}}
 style={{backgroundColor:'#337CFF',paddingVertical:10,marginTop:10,alignItems:'center',width:130}}><Text  style={{color:'white'}}>Calculator</Text></TouchableOpacity>
+
+<TouchableOpacity
+onPress={()=>{navigation.navigate('CalanderPicker')}}
+style={{backgroundColor:'#337CFF',paddingVertical:10,marginTop:10,alignItems:'center',width:130}}><Text  style={{color:'white'}}>Calander</Text></TouchableOpacity>
 
 </View>
 

@@ -18,6 +18,7 @@ import CalanderPicker from '../Screens/CalanderPicker'
 import SecondPage from '../Screens/SecondPage'
 import Calculator from '../Screens/Calculator'
 import Home from '../Screens/Home'
+import ToolTip from '../Screens/ToolTip'
 const Stack = createNativeStackNavigator();
 function MainNavigation() {
   return (
@@ -39,6 +40,7 @@ function MainNavigation() {
         <Stack.Screen name="SecondPage" component={SecondPage}/>
         <Stack.Screen name="Calculator" component={Calculator}/>
         <Stack.Screen name="Home" component={Home}   />
+        <Stack.Screen name="ToolTip" component={ToolTip}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

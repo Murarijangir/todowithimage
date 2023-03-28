@@ -1,6 +1,8 @@
-import { Modal, StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 'react-native'
+import {Modal, StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { Calendar, Agenda } from 'react-native-calendars';
+import { selectedDayTextColor } from 'react-native-calendars/src/style';
+// import Modal from 'react-native-modal';
 const FULL_WIDTH = Dimensions.get('screen').width
 
 const CalanderPicker = ({ navigation }) => {
@@ -8,8 +10,8 @@ const CalanderPicker = ({ navigation }) => {
     const [title, setTitle] = useState();
     const [note, setNote] = useState();
     const [des, setDes] = useState();
-    const [showModal, setShowModal] = useState(false);
-    const [modalVisible, setModalVisible] = useState(true)
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [tooltipText, setTooltipText] = useState('njbfnmbsfbs');
 
     const handleSubmit = (item) => {
         navigation.navigate('SecondPage', {
@@ -21,7 +23,6 @@ const CalanderPicker = ({ navigation }) => {
 
         })
     }
-    console.log('====/....>', date)
     const addZero = (a) => {
         if (a < 10 && a > 0) {
             return '0' + a.toString();
@@ -38,108 +39,79 @@ const CalanderPicker = ({ navigation }) => {
     }
     const getMinDate = () => {
         var date = new Date().getDate();
-        var month = new Date().getMonth() + 1;
+        var month = new Date().getMonth() - 1;
         var year = new Date().getFullYear();
         return year + '-' + addZero(month) + '-' + addZero(date);
     }
+    const handleDayPress = (day) => {
+        if (day.dateString === '2023-03-28', '2023-03-01', '2023-03-31', '2023-03-15') {
+            setTooltipVisible(true);
+            setTooltipText(day.tooltipText);
+            console.log('jat', tooltipText)
+        }
+    };
+
+
+
 
     return (
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>
 
 
-            <View style={{ marginTop: 15, flex: 4 }}>
+            <View style={{ }}>
 
                 <Calendar
+
                     current={getCurrentDate().toString()}
                     minDate={getMinDate().toString()}
                     maxDate={"2025-12-31"}
-
                     onDayPress={day => {
-                        setDate(day.dateString),
-                            setShowModal(!showModal)
+                        setDate(day.dateString)
                     }}
+                    onDayLongPress={handleDayPress}
+
                     hideExtraDays={true}
                     markedDates={{
-                        '2023-03-25': { selected: true, marked: true, selectedColor: 'blue', text: 'holi' },
-                        '2023-03-26': { selected: true, marked: true, selectedColor: 'red' },
-                        '2023-03-20': { selected: true, marked: true, selectedColor: 'green' },
-                        '2023-03-31': { selected: true, marked: true, selectedColor: 'pink' },
+                        '2023-03-28': { selected: true, marked: true, selectedColor: 'blue', tooltipText: 'ramakant', },
+                        '2023-03-01': { selected: true, marked: true, selectedColor: 'red', tooltipText: 'jfhsjfjs', },
+                        '2023-03-31': { selected: true, marked: true, selectedColor: 'pink', tooltipText: 'jgbsfgjbsj', },
+                        '2023-03-15': { selected: true, marked: true, selectedColor: 'green', tooltipText: 'hgfdshg', },
                     }}
-                    monthFormat={'MMMM YYYY'}
                     enableSwipeMonths={true}
+                    theme={{
+                        todayTextColor: 'red',
+                        todayBackgroundColor: '#000',
+                        textMonthFontSize: 30,
+                        monthTextColor: 'red',
+
+                    }}
                 />
 
             </View>
-            <TouchableOpacity style={{ borderWidth: 1, alignItems: 'center', width: 60, borderRadius: 20, backgroundColor: '#EFEFEF', alignSelf: 'flex-end', marginRight: 15, }}
+
+            <TouchableOpacity
                 onPress={() => {
-                    setShowModal(!showModal)
+                    setTooltipVisible(!tooltipVisible)
                 }}
             >
-                <Text style={{ color: '#000', fontSize: 40 }}>+</Text>
+
             </TouchableOpacity>
-            {showModal ? (
-                <Modal
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        setModalVisible(!modalVisible);
-                    }}>
-                    <TouchableOpacity
-                        style={styles.TouchableOpacity1}
-                        onPress={() => setShowModal(!showModal)}>
-                    </TouchableOpacity>
+            <Modal
+                transparent={true}
+                visible={tooltipVisible}
+                onRequestClose={() => {
+                    setTooltipVisible(!tooltipVisible);
+                }}>
+                <TouchableOpacity
+                    style={styles.TouchableOpacity1}
+                    onPress={() => setTooltipVisible(!tooltipVisible)}>
+                </TouchableOpacity>
 
-                    <View style={styles.modalView}>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="Enter Event Title"
-                            placeholderTextColor='#000'
-                            value={date}
-                            onPress={day => {
-                                setDate(day.dateString);
-                            }}
-                        />
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="Enter Event Title"
-                            placeholderTextColor='#000'
-                            value={title}
-                            onChangeText={tit => {
-                                setTitle(tit);
-                            }}
-                        />
-                        <TextInput
-                            style={styles.textInput}
-                            placeholderTextColor='#000'
+                <View style={styles.modalView}>
+                <Text style={{ color: 'red' ,textAlign:'center'}}>{tooltipText}</Text>
 
-                            placeholder="Enter Note"
-                            value={note}
-                            onChangeText={value => {
-                                setNote(value);
-                            }}
-                        />
-                        <TextInput
-                            style={styles.textInput}
-                            placeholderTextColor='#000'
-                            placeholder="Enter Description"
-                            value={des}
-                            onChangeText={txt => {
-                                setDes(txt);
-                            }}
-                        />
-
-                        <View style={styles.closeButton}>
-                            <TouchableOpacity
-                                style={[styles.button]}
-                                onPress={() => handleSubmit(title, note, des)}
-                            >
-                                <Text style={styles.textStyle}>SUBMIT</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Modal>
-            ) : null
-            }
+                </View>
+            </Modal>
 
 
         </View>
@@ -212,6 +184,7 @@ const styles = StyleSheet.create({
 })
 
 // import {View, StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
+
 // import {Agenda} from 'react-native-calendars';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 // import React,{useEffect, useState} from "react";
@@ -357,3 +330,67 @@ const styles = StyleSheet.create({
 
 
 // export default CalanderPicker;
+
+// import React, { useState } from 'react';
+// import { View, TouchableOpacity, StyleSheet,Text } from 'react-native';
+
+// const WaterGlass = () => {
+//   const [waterLevel, setWaterLevel] = useState(0);
+
+//   const increaseWaterLevel = () => {
+//     if (waterLevel < 100) {
+//       setWaterLevel(waterLevel + 10);
+//     }
+//   };
+
+//   const decreaseWaterLevel = () => {
+//     if (waterLevel > 0) {
+//       setWaterLevel(waterLevel - 10);
+//     }
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <View style={[styles.glass, { borderBottomWidth: waterLevel }]}>
+//       </View>
+//       <TouchableOpacity style={styles.button} onPress={increaseWaterLevel}>
+//         <Text style={styles.buttonText}>Add Water</Text>
+//       </TouchableOpacity>
+//       <TouchableOpacity style={styles.button} onPress={decreaseWaterLevel}>
+//         <Text style={styles.buttonText}>Remove Water</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   glass: {
+//     width: 100,
+//     height: 200,
+//     borderRadius: 50,
+//     backgroundColor: 'transparent',
+//     borderLeftWidth: 10,
+//     borderRightWidth: 10,
+//     position: 'absolute',
+//     bottom: 0,
+//     left: '50%',
+//     transform: [{ translateX: -50 }],
+//   },
+//   button: {
+//     backgroundColor: 'blue',
+//     padding: 10,
+//     borderRadius: 5,
+//     marginVertical: 10,
+//   },
+//   buttonText: {
+//     color: 'white',
+//     fontSize: 18,
+//   },
+// });
+
+// export default WaterGlass;
