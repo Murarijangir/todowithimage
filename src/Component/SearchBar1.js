@@ -1,11 +1,12 @@
 import { View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { Images } from '../Constant/Images'
 
 const SearchBar = (props) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={{ alignSelf: 'center', }}>
-                <Image source={require('../Images/Search.png')} style={styles.image}></Image>
+                <Image source={Images.SearchIcon} style={styles.image}></Image>
 
             </TouchableOpacity>
 

@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react'
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, StatusBar, FlatList, ScrollView } from 'react-native'
 import Video from 'react-native-video'
 import VideoPlayer from 'react-native-video-player'
+import { Images } from '../Constant/Images'
 
 const FULL_WIDTH = Dimensions.get('screen').width
 const FULL_HEIGHT = Dimensions.get('screen').height
@@ -48,7 +49,7 @@ const ImageShow = ({ navigation, route, index }) => {
                         }}
                         style={styles.iconTouch}
                     >
-                        <Image source={require('../Images/left.png')} style={styles.iconImage} />
+                        <Image source={Images.LeftArrow} style={styles.iconImage} />
                     </TouchableOpacity>}
 
                 {currentIndex === show.length - 1 ? null :
@@ -62,7 +63,7 @@ const ImageShow = ({ navigation, route, index }) => {
                         }}
                         style={styles.iconTouch}
                     >
-                        <Image source={require('../Images/right.png')} style={styles.iconImage} />
+                        <Image source={Images.RightArrow} style={styles.iconImage} />
                     </TouchableOpacity>}
             </View>
         </View>

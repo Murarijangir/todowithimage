@@ -5,6 +5,7 @@ import {
 import React, { useState } from 'react'
 import ImagePicker from 'react-native-image-crop-picker';
 import Video from 'react-native-video';
+import { Images } from '../Constant/Images';
 
 const FULL_WIDTH = Dimensions.get('screen').width
 
@@ -151,7 +152,7 @@ const ImagePickers = ({ navigation, route }) => {
                             > 
                                  <Image source={{ uri: item?.url }} style={styles.imageBox} />
 
-                                <Image source={require('../Images/play.png')} style={styles.playIcon} />
+                                <Image source={Images.Play} style={styles.playIcon} />
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.deleteBtn}

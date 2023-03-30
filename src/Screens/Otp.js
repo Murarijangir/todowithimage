@@ -65,7 +65,7 @@ const Otp = ({ navigation }) => {
             value: 480
           }}
       
-        source={require('../Images/mixit.mp4')}
+        source={require('../Assets/Image/mixit.mp4')}
           style={styles.mediaPlayer}
           volume={10}
         /> 

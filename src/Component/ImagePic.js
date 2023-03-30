@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, Modal } from 'react-native'
 import React, { useState } from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { Images } from '../Constant/Images';
 
 const ImagePic = () => {
     // var imgArray = [];
@@ -76,8 +77,7 @@ const ImagePic = () => {
 
                 {imageSource === null ? (
                     <Image
-                        source={require('../Images/profile.png')}
-                        style={{ height: 110, width: 110, borderRadius: 55 }}
+                     source={Images.ProfileOpt}                     style={{ height: 110, width: 110, borderRadius: 55 }}
                         resizeMode='stretch'
                     />
                 ) : (

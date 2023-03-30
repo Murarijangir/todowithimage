@@ -5,8 +5,7 @@ import React, { useState } from 'react';
 const FULL_WIDTH = Dimensions.get("screen").width
 const FULL_HEIGHT = Dimensions.get("screen").height
 
-
-export default function Cal() {
+const Calculator=()=>{
   const [darkTheme, setDarkTheme] = useState(false);
   const [result, setResult] = useState('');
 
@@ -93,7 +92,7 @@ export default function Cal() {
       </Text>
     </View>
 
-      <View style={{flex:2, flexDirection: "row", flexWrap: 'wrap', justifyContent: "center", backgroundColor: getColor(colors.light1, colors.dark1), elevation: 7, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+      <View style={{flex:2, flexDirection: "row", flexWrap: 'wrap', justifyContent: "center", backgroundColor: getColor(colors.light1, colors.dark1), elevation: 7, borderTopLeftRadius: 20, borderTopRightRadius: 20 ,bottom:50}}>
         <Btn title="C" type="top" />
         <Btn title="DL" type="top" />
         <Btn title="/" type="top" />
@@ -118,3 +117,4 @@ export default function Cal() {
     </View>
   );
 }
+export default Calculator;

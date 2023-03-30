@@ -18,6 +18,8 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment/moment';
 import { CountryPicker } from "react-native-country-codes-picker";
+import { Images } from '../Constant/Images';
+import Header from '../Component/Header';
 
 export default function TodoList({ text }) {
     const { state, dispatch } = useContext(TodosContext);
@@ -261,11 +263,11 @@ export default function TodoList({ text }) {
                 </View>
 
                 <View>
-                    <Text style={styles.showText}>{data.item.track}  {data.item.text}  {data.item.last}{'\n'}
-                    {data.item.code} {data.item.mobile}{'\n'}
-                    {moment(data.item.dob).format('DD-MM-YYYY')}{'\n'}
-                    {data.item.label}{'\n'}
-                    {data.item.radio}
+                    <Text style={styles.showText}>{data.item.track} {data.item.text} {data.item.last}{'\n'}
+                        {data.item.code} {data.item.mobile}{'\n'}
+                        {moment(data.item.dob).format('DD-MM-YYYY')}{'\n'}
+                        {data.item.label}{'\n'}
+                        {data.item.radio}
                     </Text>
                 </View>
             </View>
@@ -317,7 +319,9 @@ export default function TodoList({ text }) {
 
     return (
         <View style={styles.mainContainer}>
-            <ScrollView>
+            <ScrollView >
+                <Header
+                Name='Todo'/>
                 <View style={styles.subContainer}>
 
 
@@ -330,7 +334,7 @@ export default function TodoList({ text }) {
                                 setClicks(!clicks)
                             }}>
                             {imageSource === null ? (
-                                <Image source={require('../Images/profile.png')} style={styles.selectImage} resizeMode='stretch' />
+                                <Image source={Images.ProfileOpt} style={styles.selectImage} resizeMode='stretch' />
                             ) : (
                                 <Image source={{ uri: imageSource }} style={styles.selectImage} />
                             )}
@@ -609,7 +613,8 @@ export default function TodoList({ text }) {
 }
 const styles = StyleSheet.create({
     mainContainer: {
-        flex: 1
+        flex: 1,
+        marginBottom: 50
     },
     subContainer: {
         borderWidth: 1,
@@ -868,17 +873,17 @@ const styles = StyleSheet.create({
         right: 0
     },
     mainheading: {
-         color: 'black', 
-         fontWeight: 'bold' ,
-         fontSize:15,
-         lineHeight:22
-        },
-        showText:{ 
-            color: 'black', 
-            fontWeight: 'normal',
-           fontSize:15 ,
-           lineHeight:22
-         }
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 15,
+        lineHeight: 22
+    },
+    showText: {
+        color: 'black',
+        fontWeight: 'normal',
+        fontSize: 15,
+        lineHeight: 22
+    }
 
 });
 

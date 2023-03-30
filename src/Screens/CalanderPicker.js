@@ -1,28 +1,18 @@
-import {Modal, StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import { Modal, StyleSheet, Text, TouchableOpacity, View, Dimensions, Image } from 'react-native'
+import React, { useState, useRef } from 'react'
 import { Calendar, Agenda } from 'react-native-calendars';
-import { selectedDayTextColor } from 'react-native-calendars/src/style';
-// import Modal from 'react-native-modal';
+import { Images } from '../Constant/Images';
+import moment from 'moment';
+
+
 const FULL_WIDTH = Dimensions.get('screen').width
 
 const CalanderPicker = ({ navigation }) => {
-    const [date, setDate] = useState();
-    const [title, setTitle] = useState();
-    const [note, setNote] = useState();
-    const [des, setDes] = useState();
+    const [date, setDate] = useState(moment());
+
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [tooltipText, setTooltipText] = useState('njbfnmbsfbs');
 
-    const handleSubmit = (item) => {
-        navigation.navigate('SecondPage', {
-            item: item,
-            key: date,
-            key1: title,
-            key2: note,
-            key3: des,
-
-        })
-    }
     const addZero = (a) => {
         if (a < 10 && a > 0) {
             return '0' + a.toString();
@@ -58,18 +48,20 @@ const CalanderPicker = ({ navigation }) => {
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>
 
 
-            <View style={{ }}>
+            <View style={{}}>
 
                 <Calendar
-
-                    current={getCurrentDate().toString()}
-                    minDate={getMinDate().toString()}
-                    maxDate={"2025-12-31"}
+                    current={moment(date).format('YYYY-MM-DD')}
+                    key={moment(date).format('YYYY-MM-DD')}
+                    // key={getCurrentDate().toString()}
+                    // current={getCurrentDate().toString()}
+                    // minDate={getMinDate().toString()}
+                    // maxDate={"2025-12-31"}
                     onDayPress={day => {
-                        setDate(day.dateString)
+                        setDate(day)
                     }}
                     onDayLongPress={handleDayPress}
-
+                    hideArrows
                     hideExtraDays={true}
                     markedDates={{
                         '2023-03-28': { selected: true, marked: true, selectedColor: 'blue', tooltipText: 'ramakant', },
@@ -85,7 +77,48 @@ const CalanderPicker = ({ navigation }) => {
                         monthTextColor: 'red',
 
                     }}
+                    renderHeader={(date) => {
+                        return (
+                            <View style={{ flexDirection: 'row' }}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+                                    <Text style={{ fontSize: 15, color: 'red', fontWeight: 'bold' }} >Calendar</Text>
+                                </View>
+                                {console.warn("dadaad", date)}
+                                <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'space-between' }}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            console.warn("date", moment(date).format('MM-DD-YYYY'));
+                                            let month = moment(date).month();
+                                            console.warn("month", month);
+                                            let nextmonth = month + 1
+                                            let newDate = moment(date).month(nextmonth)
+                                            console.warn("newDaad", newDate);
+                                            setDate(newDate)
+                                        }}
+                                        style={{ flex: 1, alignItems: 'center' }}
+                                    >
+                                        <Image source={Images.LeftArrow} style={styles.arrows} />
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity
+                                        style={{ flex: 2, alignItems: 'center' }}
+                                    >
+                                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>december</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity
+                                        style={{ flex: 1, alignItems: 'center' }}>
+                                        <Image source={Images.RightArrow} style={styles.arrows} />
+                                    </TouchableOpacity>
+                                </View>
+
+
+                            </View>
+                        )
+                    }}
                 />
+
+
 
             </View>
 
@@ -108,9 +141,10 @@ const CalanderPicker = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <View style={styles.modalView}>
-                <Text style={{ color: 'red' ,textAlign:'center'}}>{tooltipText}</Text>
+                    <Text style={{ color: 'red', textAlign: 'center' }}>{tooltipText}</Text>
 
                 </View>
+
             </Modal>
 
 
@@ -121,7 +155,12 @@ const CalanderPicker = ({ navigation }) => {
 export default CalanderPicker
 
 const styles = StyleSheet.create({
-    textInput: { borderWidth: 1, backgroundColor: 'whitesmoke', marginTop: 15, marginHorizontal: 5, borderRadius: 10, paddingHorizontal: 20 },
+    arrows: {
+        height: 15,
+        width: 15,
+
+    },
+
     viewBox1: {
         paddingVertical: 25,
         width: FULL_WIDTH * 0.70,
@@ -183,214 +222,3 @@ const styles = StyleSheet.create({
     },
 })
 
-// import {View, StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
-
-// import {Agenda} from 'react-native-calendars';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
-// import React,{useEffect, useState} from "react";
-// import {addDays, format} from 'date-fns';
-
-// // import {Button} from "../../components/Button"
-// // import {Modal} from "../../components/Modal"
-
-
-// export default function CalendarView() {
-
-
-//     const [isModalVisible, setIsModalVisible] = useState(false);
-//     const handleModal = () => setIsModalVisible(() => !isModalVisible);
-
-//     return (
-//         <View style={styles.container}>
-//             <Agenda
-//                     style={styles.calendarWrapper}
-//                     scrollEnabled={true}
-//                     theme={{
-//                         // calendarBackground: '#000000'
-//                         todayTextColor: '#00adf5',
-//                     }}>
-//             </Agenda>
-
-//             <View style={styles.absolute}
-//                   behavior={Platform.OS === "ios" ? "padding" : "height"}>
-//                 {/* <Button onPress={handleModal}/>
-//                 <Modal isVisible={isModalVisible}>
-//                     <Modal.Container>
-//                         <Modal.Header title="Placeholder"/>
-//                         <Modal.Body>
-//                             <Text style={styles.text}>Placeholder Text</Text>
-//                         </Modal.Body>
-//                         <Modal.Footer>
-//                             <Button onPress={handleModal}/>
-//                         </Modal.Footer>
-//                     </Modal.Container>
-//                 </Modal> */}
-//             </View>
-//         </View>
-//     )
-// }
-
-// const styles = StyleSheet.create({
-//     absolute: {
-//       position: 'absolute',
-//         bottom: 80,
-//         right: 20
-//     },
-//     container: {
-//         position: 'static',
-//         flex: 1,
-//         backgroundColor: '#E8EAED',
-//     },
-//     calendarWrapper: {},
-//     items: {},
-//     dayPressColor: {
-//         backgroundColor: '#000000'
-//     },
-//     itemContainer: {
-//         backgroundColor: 'white',
-//         margin: 5,
-//         borderRadius: 15,
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         flex: 1,
-//     },
-//     text: {
-//         fontSize: 16,
-//         fontWeight: "400",
-//         textAlign: "center",
-//     },
-
-// })
-
-// import React, {useState} from 'react';
-// import {Agenda} from 'react-native-calendars';
-
-// // States
-
-// const CalanderPicker =()=>{
-
-
-// const [events, setEvents] = useState({});
-// const [marksDate, setMarksDate] = useState({});
-// const [refreshCalender, setRefreshCalender] = useState(false);
-
-// // On Add Function
-// const onAddEventSubmit = () => {
-//     setRefreshCalender(true);
-//     let items = events;
-//     let mark = {};
-//     let eventDetails = {
-//         date: "2022-02-23", // Modal Value
-//         title: "Your Event Title" // Modal Value
-//     }
-
-//     if (!items[eventDetails.date]) {
-//         items[eventDetails.date] = [];
-//     }
-
-//     items[eventDetails.date].push(eventDetails);
-
-
-//     mark[eventDetails.date] = {
-//         customStyles: {
-//           container: {
-//             backgroundColor: '#0f0',
-//           },
-//           text: {
-//             color: 'white',
-//             fontWeight: 'bold',
-//           },
-//         },
-//     };
-
-//     setEvents(items);
-//     setMarksDate(mark);
-//     setRefreshCalender(false);
-// }
-
-// return(
-
-// <Agenda
-//     items={events}
-//     // loadItemsForMonth={loadItems} // Function
-//     refreshing={refreshCalender}
-//     renderItem={(item) => {
-//         return (
-//             <View>
-//                 <Text>{item.title}</Text>
-//             </View>
-//         )
-//     }}
-//     markingType={'custom'}
-//     markedDates={marksDate}
-//     // ..other props
-// />
-// )
-// }
-
-
-// export default CalanderPicker;
-
-// import React, { useState } from 'react';
-// import { View, TouchableOpacity, StyleSheet,Text } from 'react-native';
-
-// const WaterGlass = () => {
-//   const [waterLevel, setWaterLevel] = useState(0);
-
-//   const increaseWaterLevel = () => {
-//     if (waterLevel < 100) {
-//       setWaterLevel(waterLevel + 10);
-//     }
-//   };
-
-//   const decreaseWaterLevel = () => {
-//     if (waterLevel > 0) {
-//       setWaterLevel(waterLevel - 10);
-//     }
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <View style={[styles.glass, { borderBottomWidth: waterLevel }]}>
-//       </View>
-//       <TouchableOpacity style={styles.button} onPress={increaseWaterLevel}>
-//         <Text style={styles.buttonText}>Add Water</Text>
-//       </TouchableOpacity>
-//       <TouchableOpacity style={styles.button} onPress={decreaseWaterLevel}>
-//         <Text style={styles.buttonText}>Remove Water</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   glass: {
-//     width: 100,
-//     height: 200,
-//     borderRadius: 50,
-//     backgroundColor: 'transparent',
-//     borderLeftWidth: 10,
-//     borderRightWidth: 10,
-//     position: 'absolute',
-//     bottom: 0,
-//     left: '50%',
-//     transform: [{ translateX: -50 }],
-//   },
-//   button: {
-//     backgroundColor: 'blue',
-//     padding: 10,
-//     borderRadius: 5,
-//     marginVertical: 10,
-//   },
-//   buttonText: {
-//     color: 'white',
-//     fontSize: 18,
-//   },
-// });
-
-// export default WaterGlass;

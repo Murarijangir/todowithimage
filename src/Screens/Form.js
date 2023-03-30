@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, Image, StatusBar, TouchableOpacity, ScrollView, Alert, Button } from 'react-native'
 import { Formik } from 'formik'
 import * as yup from 'yup';
+import { Images } from '../Constant/Images';
 
 const Form = ({ navigation }) => {
 
@@ -49,7 +50,7 @@ const Form = ({ navigation }) => {
             <View style={{ flexDirection: 'column', paddingTop: 10 }} >
 
               <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', width: '95%', borderRadius: 10, height: 60, paddingLeft: 20, marginTop: 20 }} >
-                <Image style={styles.social_img} source={require('../Images/Name.jpg')} />
+                <Image style={styles.social_img} source={Images.Name} />
 
                 <TextInput
                   value={values.name}
@@ -66,7 +67,7 @@ const Form = ({ navigation }) => {
               }
 
               <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', width: '95%', borderRadius: 10, height: 60, paddingLeft: 20, marginTop: 20 }} >
-                <Image style={styles.social_img} source={require('../Images/Email.jpg')} />
+                <Image style={styles.social_img} source={Images.Email} />
 
                 <TextInput
                   value={values.email}
@@ -83,7 +84,7 @@ const Form = ({ navigation }) => {
               }
 
               <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', width: '95%', borderRadius: 10, height: 60, paddingLeft: 20, marginTop: 20 }} >
-                <Image style={styles.social_img} source={require('../Images/Pass.jpg')} resizeMode='stretch' />
+                <Image style={styles.social_img} source={Images.Password} resizeMode='stretch' />
 
                 <TextInput
                   value={values.password}
@@ -104,7 +105,7 @@ const Form = ({ navigation }) => {
               }
 
               <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', width: '95%', borderRadius: 10, height: 60, paddingLeft: 20, marginTop: 20 }} >
-              <Image style={styles.social_img} source={require('../Images/Add.jpg')} resizeMode='stretch'/>
+              <Image style={styles.social_img} source={Images.Address} resizeMode='stretch'/>
 
                 <TextInput
                   value={values.address}
@@ -121,7 +122,7 @@ const Form = ({ navigation }) => {
               }
 
               <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', width: '95%', borderRadius: 10, height: 60, paddingLeft: 20, marginTop: 20 }} >
-                <Image style={styles.social_img} source={require('../Images/Contacts.jpg')} />
+                <Image style={styles.social_img} source={Images.Contact} />
 
                 <TextInput
                   value={values.contact}
