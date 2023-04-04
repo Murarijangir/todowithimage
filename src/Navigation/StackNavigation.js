@@ -1,45 +1,15 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import DrawerNavigation from './DrawerNavigation'
 
-import { View, Platform, StatusBar } from 'react-native';
-import React from 'react';
-import TabNavigation from './TabNavigation';
-import { DrawerNavigation } from './DrawerNavigation';
-import Login from '../Screens/Login';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+const StackNavigation = ({navigation}) => {
+  return (
+    <View style={{flex:1}}>
+        <DrawerNavigation/>
+    </View>
+  )
+}
 
-const Stack = createNativeStackNavigator();
+export default StackNavigation
 
-export const AuthStack = () => {
-    
-    return (
-        <View style={{ flex: 1 }}>
-            {Platform.OS == 'android' ? (
-                <StatusBar
-                    translucent={true}
-                    barStyle="light-content"
-                    animated={true}
-                />
-            ) : (
-                <View />
-            )}
-            <Stack.Navigator
-                screenOptions={{ headerShown: false }}
-                initialRouteName={"Login"}>
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="TabNavigation" component={TabNavigation} />
-                <Stack.Screen name='DrawerNavigtion' component={DrawerNavigation} />
-
-            </Stack.Navigator>
-        </View>
-    );
-};
-
-// export const HomeStack = () => {
-//     return (
-//         <Stack.Navigator >
-//             <Stack.Screen
-//                 name="Tab"
-//                 component={TabNavigation}
-//             />
-//         </Stack.Navigator>
-//     );
-// };
+const styles = StyleSheet.create({})

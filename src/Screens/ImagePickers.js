@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import ImagePicker from 'react-native-image-crop-picker';
 import Video from 'react-native-video';
 import { Images } from '../Constant/Images';
+import Header from '../Component/Header';
 
 const FULL_WIDTH = Dimensions.get('screen').width
 
@@ -110,6 +111,9 @@ const ImagePickers = ({ navigation, route }) => {
 
     return (
         <View style={{ flex: 1 }}>
+            <Header
+                Name='Image And Video'
+            />
             <TouchableOpacity
                 onPress={() => {
                     setClicks(!clicks)
@@ -145,12 +149,12 @@ const ImagePickers = ({ navigation, route }) => {
                         </View>
                     ))}
 
-                   {videoView?.map((item, index) => (
+                    {videoView?.map((item, index) => (
                         <View style={{ alignItems: 'center' }}>
                             <TouchableOpacity style={styles.viewBox}
                                 onPress={() => Play(item)}
-                            > 
-                                 <Image source={{ uri: item?.url }} style={styles.imageBox} />
+                            >
+                                <Image source={{ uri: item?.url }} style={styles.imageBox} />
 
                                 <Image source={Images.Play} style={styles.playIcon} />
                             </TouchableOpacity>
@@ -235,8 +239,8 @@ const ImagePickers = ({ navigation, route }) => {
                     }
                 </View>
             </ScrollView >
-            
- {/* <FlatList
+
+            {/* <FlatList
                 horizontal
                 contentContainerStyle={{
                 }}
@@ -266,7 +270,7 @@ const ImagePickers = ({ navigation, route }) => {
                     )
                 }}
             />  */}
-{/* 
+            {/* 
  <View style={{ alignSelf: 'center', flexDirection: 'row' }}>
                 {imageSource.map((item, index) => {
                     return (

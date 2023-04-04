@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react'
 import { Calendar, Agenda } from 'react-native-calendars';
 import { Images } from '../Constant/Images';
 import moment from 'moment';
+import Header from '../Component/Header';
 
 
 const FULL_WIDTH = Dimensions.get('screen').width
@@ -47,7 +48,9 @@ const CalanderPicker = ({ navigation }) => {
     return (
         <View style={{ flex: 1, backgroundColor: '#FFF' }}>
 
-
+<Header
+Name='Calendar'
+/>
             <View style={{}}>
 
                 <Calendar

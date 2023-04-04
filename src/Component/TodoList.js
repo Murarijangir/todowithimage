@@ -9,7 +9,8 @@ import {
     Text,
     TextInput,
     Alert,
-    Modal
+    Modal,
+    StatusBar
 } from 'react-native';
 import uuid from 'uuid-random';
 import { TodosContext } from '../Screens/Curd';
@@ -319,9 +320,12 @@ export default function TodoList({ text }) {
 
     return (
         <View style={styles.mainContainer}>
+            <Header
+            Name='Todo'
+            />
+            {/* <StatusBar backgroundColor='#EDEDED' /> */}
             <ScrollView >
-                <Header
-                Name='Todo'/>
+              
                 <View style={styles.subContainer}>
 
 
@@ -590,7 +594,7 @@ export default function TodoList({ text }) {
 
                 </View>
 
-                <View style={{ marginTop: 5 }}>
+                <View style={{ marginTop: 5, paddingHorizontal: 10 }}>
                     <SearchBar1
                         value={search}
                         onChangeText={(search) => {
@@ -614,10 +618,11 @@ export default function TodoList({ text }) {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        marginBottom: 50
+        marginBottom: 50,
+        backgroundColor: '#EDEDED'
     },
     subContainer: {
-        borderWidth: 1,
+        // borderWidth: 1,
         marginTop: 7,
         marginHorizontal: 10,
     },
@@ -625,7 +630,8 @@ const styles = StyleSheet.create({
     maincont: {
         justifyContent: 'center',
         height: 50,
-        borderWidth: 1,
+        // borderWidth: 1,
+        backgroundColor: '#FFF',
         borderRadius: 10,
         marginTop: 10,
         marginHorizontal: 10,

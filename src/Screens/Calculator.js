@@ -1,6 +1,6 @@
 import { View, Text, Switch, TouchableOpacity, Dimensions, StatusBar, ScrollView } from 'react-native';
 import React, { useState } from 'react';
-
+import Header from '../Component/Header'
 
 const FULL_WIDTH = Dimensions.get("screen").width
 const FULL_HEIGHT = Dimensions.get("screen").height
@@ -67,6 +67,9 @@ const Calculator=()=>{
 
   return (
     <View  style={{flex:1, backgroundColor: getColor(colors.light1, colors.dark1),}}>
+      <Header
+      Name='Calculator'
+      />
     <View
       style={{
         flex:1.5,

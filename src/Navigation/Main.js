@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import TabNavigation from './TabNavigation'
 
-const NotificationsScreen = () => {
+const Main = () => {
   return (
-    <View>
-      <Text>NotificationsScreen</Text>
+    <View style={{flex:1}}>
+        <TabNavigation/>
     </View>
   )
 }
 
-export default NotificationsScreen
+export default Main
 
 const styles = StyleSheet.create({})

@@ -1,12 +1,16 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View, TextInput } from 'react-native';
+import { SafeAreaView, StyleSheet, View, TextInput, StatusBar } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import map from "../../map.json"
+import Header from '../Component/Header';
 const GoogleMap = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
+       <Header
+                Name='Google Map'
+            />
       <View style={styles.container}>
-   
+    
         <MapView
           style={styles.mapStyle}
           initialRegion={{
@@ -17,9 +21,9 @@ const GoogleMap = () => {
           }}
           customMapStyle={map}
           zoomControlEnabled={true}
-          
-          >
-       
+
+        >
+
           <Marker
             draggable
             coordinate={{
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
   },
   mapStyle: {
     position: 'absolute',
-    top: 0,
+    top: 80,
     left: 0,
     right: 0,
     bottom: 40,

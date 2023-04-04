@@ -49,7 +49,7 @@ const Login = () => {
 
 
                 <Button btn_text={"Submit"} 
-                on_press={() => { navigation.navigate('TabNavigation') }}
+                on_press={() => { navigation.navigate('StackNavigation') }}
                  />
 
                 <Text style={{ fontSize: 20, textAlign: 'center', marginTop: 10 }}>OR</Text>
@@ -59,7 +59,7 @@ const Login = () => {
                     >
                         <Image source={Images.Google} />
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    <TouchableOpacity onPress={()=>{navigation.navigate('Exercise')}}
                     >
                         <Image style={{ height: 50, width: 50 }} source={Images.Facebook} resizeMode="stretch" />
                     </TouchableOpacity>

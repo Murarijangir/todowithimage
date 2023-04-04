@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, StatusBar, View } from 'react-native'
+import { Image, StatusBar, View,Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Images } from '../Constant/Images';
 import Curd from '../Screens/Curd';
@@ -7,81 +7,206 @@ import ImagePickers from '../Screens/ImagePickers';
 import CalanderPicker from '../Screens/CalanderPicker';
 import Calculator from '../Screens/Calculator';
 import GoogleMap from '../Screens/GoogleMap';
+import colors from '../Constant/colors';
 
 const Tab = createBottomTabNavigator();
-const TabNavigation = ({ navigation, }) => {
+const commonOptions = {
+
+};
+const tabStyle = {
+    tabBarHideOnKeyboard: true,
+    tabBarStyle: {
+        position: 'absolute',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        height: Platform.OS === "ios" ? 90 : 65,
+    }
+
+};
+const TabNavigation = () => {
     return (
-        <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true, position: 'absolute', headerShown: false, tabBarStyle: { backgroundColor: '#FFFFFF', borderWidth: 0, position: 'absolute' } }}
-        >
+        <Tab.Navigator
+            screenOptions={{
+                // tabBarBackground:'#7854F7',
+                headerShown: false,
+                tabBarShowLabel: false,
+                ...tabStyle,
+                tabBarStyle: {
+                    bottom: 0
+                    
+                }
+            }}
+            initialRouteName={'Curd'}>
+
             <Tab.Screen
-                name='Home'
+                name='Curd'
                 component={Curd}
+
+                tabBarOptions={{
+                    showLabel: true,
+                }}
                 options={{
-                    title: '',
-                    tabBarIcon: ({ focused, tintColor }) => (
-                        <Image
-                            source={Images.User}
-                            style={{ height: 22, width: 22, top: 9 }}
-                            tintColor={focused ? "#7854F7" : "#000"}
-                        />
-                    ),
+                    ...commonOptions,
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                                <View style={{ borderTopColor: focused ? colors.LightPurple : colors.Black, borderTopWidth: 2, borderTopLeftRadius: 20, width: 40, bottom: Platform.OS === "ios" ? 3 : 3 }} />
+                                <Image
+                                    style={[
+                                        { width: 22, height: 22, resizeMode: 'contain' },
+                                        focused
+                                            ? { tintColor: colors.LightPurple }
+                                            : { tintColor: colors.Black },
+                                    ]}
+                                    source={Images.User}
+                                />
+
+                                <Text
+                                    style={{
+                                        color: focused ? colors.LightPurple : colors.Black, fontSize: 12, 
+                                    }}>
+                                    Home
+                                </Text>
+                            </View>
+                        );
+                    },
                 }}
             />
             <Tab.Screen
                 name='GoogleMap'
                 component={GoogleMap}
+               
+                tabBarOptions={{
+                    showLabel: true,
+                }}
                 options={{
-                    title: '',
-                    tabBarIcon: ({ focused }) => (
-                        <Image source={Images.GoogleMap}
-                            style={{ height: 22, width: 22, top: 9 }}
-                            tintColor={focused ? "#7854F7" : "#000"}
+                    ...commonOptions,
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                                <View style={{ borderTopColor: focused ? colors.LightPurple : colors.Black, borderTopWidth: 2, borderTopLeftRadius: 20, width: 40, bottom: Platform.OS === "ios" ? 3 : 3 }} />
+                                <Image
+                                    style={[
+                                        { width: 22, height: 22, resizeMode: 'contain' },
+                                        focused
+                                            ? { tintColor: colors.LightPurple }
+                                            : { tintColor: colors.Black },
+                                    ]}
+                                    source={Images.GoogleMap}
+                                />
 
-                        />
-                    ),
+                                <Text
+                                    style={{
+                                        color: focused ? colors.LightPurple : colors.Black, fontSize: 12, 
+                                    }}>
+                                    GoogleMaps
+                                </Text>
+                            </View>
+                        );
+                    },
+                }}
+            />
+              <Tab.Screen
+                name='ImagePickers'
+                component={ImagePickers}
+              
+                tabBarOptions={{
+                    showLabel: true,
+                }}
+                options={{
+                    ...commonOptions,
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                                <View style={{ borderTopColor: focused ? colors.LightPurple : colors.Black, borderTopWidth: 2, borderTopLeftRadius: 20, width: 40, bottom: Platform.OS === "ios" ? 3 : 3 }} />
+                                <Image
+                                    style={[
+                                        { width: 22, height: 22, resizeMode: 'contain' },
+                                        focused
+                                            ? { tintColor: colors.LightPurple }
+                                            : { tintColor: colors.Black },
+                                    ]}
+                                    source={Images.VideoPlay}
+                                />
+
+                                <Text
+                                    style={{
+                                        color: focused ? colors.LightPurple : colors.Black, fontSize: 12, 
+                                    }}>
+                                    Video
+                                </Text>
+                            </View>
+                        );
+                    },
                 }}
             />
             <Tab.Screen
                 name='Calculator'
                 component={Calculator}
-                options={{
-                    title: '',
-                    tabBarIcon: ({ focused }) => (
-                        <Image
-                        source={Images.Calculator}
-                            style={{ height: 22, width: 22, top: 9 }}
-                            tintColor={focused ? "#7854F7" : "#000"}
-                        />
-                    ),
+            
+                tabBarOptions={{
+                    showLabel: true,
                 }}
-            />
-            <Tab.Screen
-                name='Uploads'
-                component={ImagePickers}
                 options={{
-                    title: '',
-                    tabBarIcon: ({ focused }) => (
-                        <Image
-                        source={Images.VideoPlay}
-                            style={{ height: 22, width: 22, top: 9 }}
-                            tintColor={focused ? "#7854F7" : "#000"}
-                        />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name='Calander'
-                component={CalanderPicker}
-                options={{
-                    title: '',
-                    tabBarIcon: ({ focused }) => (
-                        <Image
-                        source={Images.Calander}
-                            style={{ height: 22, width: 22, top: 9 }}
-                            tintColor={focused ? "#7854F7" : "#000"}
+                    ...commonOptions,
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                                <View style={{ borderTopColor: focused ? colors.LightPurple : colors.Black, borderTopWidth: 2, borderTopLeftRadius: 20, width: 40, bottom: Platform.OS === "ios" ? 3 : 3 }} />
+                                <Image
+                                    style={[
+                                        { width: 22, height: 22, resizeMode: 'contain' },
+                                        focused
+                                            ? { tintColor: colors.LightPurple }
+                                            : { tintColor: colors.Black },
+                                    ]}
+                                    source={Images.Calculator}
+                                />
 
-                        />
-                    ),
+                                <Text
+                                    style={{
+                                        color: focused ? colors.LightPurple : colors.Black, fontSize: 12, 
+                                    }}>
+                                    Calculator
+                                </Text>
+                            </View>
+                        );
+                    },
+                }}
+            />
+          
+            <Tab.Screen
+                name='CalanderPicker'
+                component={CalanderPicker}
+            
+                tabBarOptions={{
+                    showLabel: true,
+                }}
+                options={{
+                    ...commonOptions,
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                                <View style={{ borderTopColor: focused ? colors.LightPurple : colors.Black, borderTopWidth: 2, borderTopLeftRadius: 20, width: 40, bottom: Platform.OS === "ios" ? 3 : 3 }} />
+                                <Image
+                                    style={[
+                                        { width: 22, height: 22, resizeMode: 'contain' },
+                                        focused
+                                            ? { tintColor: colors.LightPurple }
+                                            : { tintColor: colors.Black },
+                                    ]}
+                                    source={Images.Calander}
+                                />
+
+                                <Text
+                                    style={{
+                                        color: focused ? colors.LightPurple : colors.Black, fontSize: 12, 
+                                    }}>
+                                    Calander
+                                </Text>
+                            </View>
+                        );
+                    },
                 }}
             />
 
@@ -90,3 +215,6 @@ const TabNavigation = ({ navigation, }) => {
 }
 
 export default TabNavigation;
+
+
+
